@@ -57,7 +57,7 @@ void matrix_init_user(void) {}
 
 void matrix_scan_user(void) {
     if (is_cmd_tab_active) {
-        if (timer_elapsed(cmd_tab_timer) > 600) {
+        if (timer_elapsed(cmd_tab_timer) > 400) {
             unregister_code(KC_LGUI);
             is_cmd_tab_active = false;
         }
