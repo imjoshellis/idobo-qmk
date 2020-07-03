@@ -17,5 +17,5 @@
 #pragma once
 
 // place overrides here
-#define TAPPING_TERM 100
+#define TAPPING_TERM 150
 #define PERMISSIVE_HOLD
