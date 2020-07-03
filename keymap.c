@@ -1,4 +1,4 @@
-/* Copyright 2018 MechMerlin
+/* Copyright 2020 imjoshellis
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,4 +64,4 @@ void matrix_scan_user(void) {
     }
 }
 
-void led_set_user(uint8_t usb_led) {}
+void led_set_user(uint8_t usb_led) {
