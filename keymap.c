@@ -19,17 +19,18 @@ bool     is_cmd_tab_active = false;
 uint16_t cmd_tab_timer     = 0;
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { ARROW = SAFE_RANGE, ARROW_FN, CMD_TAB };
+enum custom_keycodes { ARW = SAFE_RANGE, ARW_FN, CMD_TAB };
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case ARROW:
+        case ARW:
             if (record->event.pressed) {
                 SEND_STRING("=>");
             } else {
             }
             break;
-        case ARROW_FN:
+        case ARW_FN:
             if (record->event.pressed) {
                 SEND_STRING(" = () => {}");
             } else {
@@ -59,12 +60,76 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM;
     }
 }
+
+// Definitions for cleaner matrix
+
+// Tap / Hold
+#define LC_TAB  LCTL_T(KC_TAB)   // TAB  || CTRL 
+#define LT_Z    LT(1, KC_Z)      // Z    || L1 
+#define LT_SLSH LT(2, KC_SLSH)   // SLSH || L2
+#define LCA_ESC LCA_T(KC_ESC)    // ESC  || L2 
+#define LT_SPC  LT(2, KC_SPC)    // SPC  || L2 
+#define SFT_TAB LSFT_T(KC_TAB)   // TAB  || SFT 
+#define SG_ENT  SGUI_T(KC_ENT)   // SGUI || ENT 
+
+// Window Controls
+#define W_UL    C(A(KC_U))    // UP-LEFT
+#define W_U     C(A(KC_UP))    // UP
+#define W_UR    C(A(KC_I))    // UP-RIGHT
+#define W_L     C(A(KC_LEFT)) // LEFT
+#define W_C     C(A(KC_C))    // CENTER
+#define W_R     C(A(KC_RGHT)) // RIGHT
+#define W_DL    C(A(KC_J))    // DOWN-LEFT
+#define W_D     C(A(KC_DOWN)) // DOWN
+#define W_DR    C(A(KC_K))    // DOWN-RIGHT
+#define W_LTRD  C(A(KC_D))    // LEFT   1/3
+#define W_CTRD  C(A(KC_F))    // CENTER 1/3
+#define W_RTRD  C(A(KC_G))    // RIGHT  1/3
+#define W_L2TRD C(A(KC_E))    // LEFT   2/3
+#define W_R2TRD C(A(KC_T))    // RIGHT  2/3
+#define W_MAX   C(A(KC_ENT))  // MAXIMIZE
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_ortho_5x15(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_TRNS, KC_TRNS, KC_TRNS, KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSPC, KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_TRNS, OSL(4), KC_TRNS, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH, LCTL_T(KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G, KC_TRNS, KC_TRNS, KC_TRNS, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOTE, LSFT_T(KC_TRNS), LT(1, KC_Z), KC_X, KC_C, KC_V, KC_B, KC_TRNS, KC_TRNS, KC_TRNS, KC_N, KC_M, KC_COMMA, KC_DOT, LT(2, KC_SLASH), KC_ENT, MO(4), LCA_T(KC_ESC), KC_LCTRL, KC_LALT, KC_LGUI, LT(2, KC_SPC), LSFT_T(KC_TAB), KC_NO, SGUI_T(KC_ENT), LT(1, KC_SPC), CMD_TAB, OSL(4), KC_NO, KC_NO, MO(3)),
-    [1] = LAYOUT_ortho_5x15(KC_TRNS, KC_BRID, KC_BRIU, KC_TRNS, RGB_TOG, BL_TOGG, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE, KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MPRV, KC_MPLY, KC_MNXT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_ENT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
-    [2] = LAYOUT_ortho_5x15(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE, KC_VOLD, KC_VOLU, KC_CIRC, KC_AMPERSAND, KC_TRNS, KC_TRNS, KC_TRNS, KC_AT, KC_LPRN, KC_RPRN, ARROW, KC_TRNS, ARROW_FN, KC_TRNS, KC_MPRV, KC_MPLY, KC_MNXT, KC_EXCLAIM, KC_PERC, KC_TRNS, KC_TRNS, KC_TRNS, KC_DOLLAR, KC_LBRC, KC_RBRC, KC_MINS, KC_EQL, KC_GRAVE, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_ASTR, KC_TRNS, KC_TRNS, KC_TRNS, KC_HASH, KC_UNDS, KC_PLUS, KC_GT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_ENT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
-    [3] = LAYOUT_ortho_5x15(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RESET, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
-    [4] = LAYOUT_ortho_5x15(KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_TRNS, C(A(KC_D)), C(A(KC_F)), C(A(KC_G)), KC_TRNS, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, KC_TRNS, KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS, C(A(KC_E)), C(A(KC_ENT)), C(A(KC_T)), KC_TRNS, KC_P7, KC_P8, KC_P9, KC_PPLS, KC_TRNS, KC_TRNS, KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS, C(A(KC_U)), C(A(KC_UP)), C(A(KC_I)), KC_TRNS, KC_P4, KC_P5, KC_P6, KC_PCMM, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, C(A(KC_LEFT)), C(A(KC_C)), C(A(KC_RIGHT)), KC_TRNS, KC_P1, KC_P2, KC_P3, KC_PEQL, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, C(A(KC_J)), C(A(KC_DOWN)), C(A(KC_K)), KC_TRNS, KC_P0, KC_P0, KC_PDOT, KC_PENT, KC_TRNS),
+    [0] = LAYOUT_ortho_5x15(
+    //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, OSL(3),  _______, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
+        LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______, _______, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
+        KC_LSFT, LT_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______, _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  LT_SLSH, KC_ENT, 
+        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_ENT,  KC_SPC,  CMD_TAB, OSL(3),  _______, _______, MO(12)
+        ),
+    [1] = LAYOUT_ortho_5x15(
+    //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, KC_BRID, KC_BRIU, _______, RGB_TOG, BL_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______, _______, _______, _______, _______
+        ),
+    [2] = LAYOUT_ortho_5x15(
+    //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_PERC, KC_AMPR, _______, _______, _______, KC_AT,   KC_LPRN, KC_RPRN, ARW,     _______, ARW_FN, 
+        _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_EXLM, KC_CIRC, _______, _______, _______, KC_DLR,  KC_LBRC, KC_RBRC, KC_MINS, KC_EQL,  KC_GRV, 
+        _______, _______, _______, _______, _______, KC_ASTR, _______, _______, _______, KC_HASH, KC_UNDS, KC_PLUS, KC_GT,   _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______
+        ),
+    [3] = LAYOUT_ortho_5x15(
+    //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______, W_LTRD,  W_CTRD,  W_CTRD,  _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, 
+        _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______, W_L2TRD, W_MAX,   W_R2TRD, _______, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______, 
+        _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, W_UL,    W_U,     W_UR,    _______, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, _______, 
+        _______, _______, _______, _______, _______, _______, W_L,     W_C,     W_R,     _______, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, _______, 
+        _______, _______, _______, _______, _______, _______, W_DL,    W_D,     W_DR,    _______, KC_P0,   KC_P0,   KC_PDOT, KC_PENT, _______
+        ),
+    [12] = LAYOUT_ortho_5x15(
+    //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, RESET,   _______, _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+        ),
 };
 
 void matrix_init_user(void) {}
