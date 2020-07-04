@@ -74,7 +74,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 // Window Controls
 #define W_UL    C(A(KC_U))    // UP-LEFT
-#define W_U     C(A(KC_UP))    // UP
+#define W_U     C(A(KC_UP))   // UP
 #define W_UR    C(A(KC_I))    // UP-RIGHT
 #define W_L     C(A(KC_LEFT)) // LEFT
 #define W_C     C(A(KC_C))    // CENTER
@@ -89,20 +89,33 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #define W_R2TRD C(A(KC_T))    // RIGHT  2/3
 #define W_MAX   C(A(KC_ENT))  // MAXIMIZE
 
+// Space Navigation
+#define N_ND    C(KC_RGHT)    // Next desktop
+#define N_PD    C(S(KC_LEFT)) // Prev desktop
+#define N_NW    C(KC_GRV)     // Next window
+#define N_PW    C(S(KC_GRV))  // Prev window
+#define N_NT    C(KC_TAB)     // Next tab
+#define N_PT    C(S(KC_TAB))  // Prev tab
+
+// Zoom Controls
+#define Z_IN    G(KC_EQL)     // Zoom in
+#define Z_OUT   G(KC_MINS)    // Zoom out
+#define Z_RESET G(KC_0)       // Zoom reset
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
+        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    Z_OUT,   Z_RESET, Z_IN,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, OSL(3),  _______, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
         LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______, _______, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
         KC_LSFT, LT_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______, _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  LT_SLSH, KC_ENT, 
-        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_ENT,  KC_SPC,  CMD_TAB, OSL(3),  _______, _______, MO(12)
+        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_ENT,  KC_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
         ),
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, KC_BRID, KC_BRIU, _______, RGB_TOG, BL_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, 
+        _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_ND,    _______, 
+        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_PD,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
         _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
