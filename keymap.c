@@ -90,10 +90,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #define W_MAX   C(A(KC_ENT))  // MAXIMIZE
 
 // Space Navigation
-#define N_ND    C(KC_RGHT)    // Next desktop
-#define N_PD    C(S(KC_LEFT)) // Prev desktop
-#define N_NW    C(KC_GRV)     // Next window
-#define N_PW    C(S(KC_GRV))  // Prev window
+#define N_ND    C(KC_RGHT)   // Next desktop
+#define N_PD    C(KC_LEFT)    // Prev desktop
+#define N_NW    G(KC_GRV)     // Next window
+#define N_PW    G(S(KC_GRV))  // Prev window
 #define N_NT    C(KC_TAB)     // Next tab
 #define N_PT    C(S(KC_TAB))  // Prev tab
 
@@ -114,8 +114,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, KC_BRID, KC_BRIU, _______, RGB_TOG, BL_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_ND,    _______, 
-        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_PD,    _______, 
+        _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_PD,    _______, 
+        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
         _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
