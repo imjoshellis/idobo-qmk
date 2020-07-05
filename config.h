@@ -17,9 +17,7 @@
 #pragma once
 
 // place overrides here
-#define TAPPING_TERM 150
-#define TAPPING_TERM_PER_KEY
-#define PERMISSIVE_HOLD
+#define TAPPING_TERM 160
 #define ONESHOT_TIMEOUT 1000
 #define NO_AUTO_SHIFT_ALPHA
 #define AUTO_SHIFT_TIMEOUT 120
