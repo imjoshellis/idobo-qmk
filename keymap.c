@@ -32,7 +32,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case ARW_FN:
             if (record->event.pressed) {
-                SEND_STRING(" = () => {}");
+                SEND_STRING("() => {}");
             } else {
             }
             break;
@@ -61,7 +61,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// Definitions for cleaner matrix
+// Definitions for cleaner matrix 
 
 // Tap / Hold
 #define LC_TAB  LCTL_T(KC_TAB)   // TAB  || CTRL 
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    Z_OUT,   Z_RESET, Z_IN,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, OSL(3),  _______, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
         LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______, _______, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
-        KC_LSFT, LT_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______, _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  LT_SLSH, KC_ENT, 
+        KC_LSFT, LT_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______, _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
         MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_ENT,  KC_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
         ),
     [1] = LAYOUT_ortho_5x15(
