@@ -21,7 +21,7 @@ uint16_t cmd_tab_timer     = 0;
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes { ARW = SAFE_RANGE, ARW_FN, CMD_TAB };
 
-
+// Define macros
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ARW:
@@ -52,6 +52,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+// Change tapping term for left space to be very short
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2, KC_SPC):
@@ -60,6 +61,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM;
     }
 }
+
+// Tap Dance declarations
+enum {
+    TD_VS_TERM,
+};
+
+// Tap Dance definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for CMD+J, twice for CMD+SHFT+J
+    [TD_VS_TERM] = ACTION_TAP_DANCE_DOUBLE(G(KC_J), G(S(KC_J))),
+};
 
 // Definitions for cleaner matrix 
 
@@ -73,34 +85,41 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #define SG_ENT  SGUI_T(KC_ENT)   // SGUI || ENT 
 
 // Window Controls
-#define W_UL    C(A(KC_U))    // UP-LEFT
-#define W_U     C(A(KC_UP))   // UP
-#define W_UR    C(A(KC_I))    // UP-RIGHT
-#define W_L     C(A(KC_LEFT)) // LEFT
-#define W_C     C(A(KC_C))    // CENTER
-#define W_R     C(A(KC_RGHT)) // RIGHT
-#define W_DL    C(A(KC_J))    // DOWN-LEFT
-#define W_D     C(A(KC_DOWN)) // DOWN
-#define W_DR    C(A(KC_K))    // DOWN-RIGHT
-#define W_LTRD  C(A(KC_D))    // LEFT   1/3
-#define W_CTRD  C(A(KC_F))    // CENTER 1/3
-#define W_RTRD  C(A(KC_G))    // RIGHT  1/3
-#define W_L2TRD C(A(KC_E))    // LEFT   2/3
-#define W_R2TRD C(A(KC_T))    // RIGHT  2/3
-#define W_MAX   C(A(KC_ENT))  // MAXIMIZE
+#define W_UL    C(A(KC_U))     // UP-LEFT
+#define W_U     C(A(KC_UP))    // UP
+#define W_UR    C(A(KC_I))     // UP-RIGHT
+#define W_L     C(A(KC_LEFT))  // LEFT
+#define W_C     C(A(KC_C))     // CENTER
+#define W_R     C(A(KC_RGHT))  // RIGHT
+#define W_DL    C(A(KC_J))     // DOWN-LEFT
+#define W_D     C(A(KC_DOWN))  // DOWN
+#define W_DR    C(A(KC_K))     // DOWN-RIGHT
+#define W_LTRD  C(A(KC_D))     // LEFT   1/3
+#define W_CTRD  C(A(KC_F))     // CENTER 1/3
+#define W_RTRD  C(A(KC_G))     // RIGHT  1/3
+#define W_L2TRD C(A(KC_E))     // LEFT   2/3
+#define W_R2TRD C(A(KC_T))     // RIGHT  2/3
+#define W_MAX   C(A(KC_ENT))   // MAXIMIZE
 
 // Space Navigation
-#define N_ND    C(KC_RGHT)   // Next desktop
-#define N_PD    C(KC_LEFT)    // Prev desktop
-#define N_NW    G(KC_GRV)     // Next window
-#define N_PW    G(S(KC_GRV))  // Prev window
-#define N_NT    C(KC_TAB)     // Next tab
-#define N_PT    C(S(KC_TAB))  // Prev tab
+#define N_ND    C(KC_RGHT)     // Next Desktop
+#define N_PD    C(KC_LEFT)     // Prev Desktop
+#define N_NW    G(KC_GRV)      // Next Window
+#define N_PW    G(S(KC_GRV))   // Prev Window
+#define N_NT    C(KC_TAB)      // Next Tab
+#define N_PT    C(S(KC_TAB))   // Prev Tab
 
 // Zoom Controls
-#define Z_IN    G(KC_EQL)     // Zoom in
-#define Z_OUT   G(KC_MINS)    // Zoom out
-#define Z_RESET G(KC_0)       // Zoom reset
+#define Z_IN    G(KC_EQL)      // Zoom In
+#define Z_OUT   G(KC_MINS)     // Zoom Out
+#define Z_RESET G(KC_0)        // Zoom Reset
+
+// VS Code Controls
+#define VS_TERM TD(TD_VS_TERM) // Focus/Hide Terminal
+#define VS_WIN1 G(KC_1)        // Focus First Panel
+#define VS_WIN2 G(KC_2)        // Focus Second Panel
+#define VS_EXP  G(S(KC_E))     // Focus Explorer
+#define VS_GIT  C(S(KC_G))     // Focus Source Control
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ortho_5x15(
@@ -116,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_BRID, KC_BRIU, _______, RGB_TOG, BL_TOGG, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
         _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_PD,    _______, 
         _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, VS_TERM, VS_WIN1, VS_WIN2, VS_EXP,  VS_GIT,  _______, 
         _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
     [2] = LAYOUT_ortho_5x15(
