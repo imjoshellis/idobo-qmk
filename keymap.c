@@ -86,7 +86,7 @@ void    lthumb_reset(qk_tap_dance_state_t *state, void *user_data);
 #define LT_SPC  TD(TD_LTHUMB)    // SPC  || TD LTHUMB 
 #define RT_SPC  LT(1, KC_SPC)    // SPC  || TD LTHUMB 
 #define SFT_TAB LSFT_T(KC_TAB)   // TAB  || SFT 
-#define SG_ENT  SGUI_T(KC_ENT)   // SGUI || ENT 
+#define SG_BSPC  SGUI_T(KC_BSPC)   // SGUI || ENT 
 
 // Window Controls
 #define W_UL    C(A(KC_U))     // UP-LEFT
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, OSL(3),  DIS_NCH, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
         LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_MUTE, KC_VOLD, KC_VOLU, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPRV, KC_MPLY, KC_MNXT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
-        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_ENT,  RT_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
+        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_BSPC,  RT_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
         ),
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
