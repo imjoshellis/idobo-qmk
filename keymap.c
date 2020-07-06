@@ -133,30 +133,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    Z_OUT,   Z_RESET, Z_IN,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, OSL(3),  DIS_NCH, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
-        LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______, _______, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______, _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
+        LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_MUTE, KC_VOLD, KC_VOLU, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPRV, KC_MPLY, KC_MNXT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
         MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_ENT,  RT_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
         ),
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_PD,    _______, 
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
+        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, _______, _______, N_PW,    N_NT,    N_PT,    N_NW,    N_PD,    _______, 
+        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, N_ND,    _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, VS_TERM, VS_WIN1, VS_WIN2, VS_EXP,  VS_GIT,  _______, 
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ ),
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+        ),
     [2] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-        _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_PERC, KC_AMPR, _______, _______, _______, KC_AT,   KC_LPRN, KC_RPRN, ARW,     _______, ARW_FN, 
-        _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_EXLM, KC_CIRC, _______, _______, _______, KC_DLR,  KC_LBRC, KC_RBRC, KC_MINS, KC_EQL,  KC_GRV, 
-        _______, _______, _______, _______, _______, KC_ASTR, _______, _______, _______, KC_HASH, KC_UNDS, KC_PLUS, KC_GT,   _______, _______, 
+        KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, _______, _______, KC_HASH, KC_LCBR, KC_RCBR, ARW,     _______, ARW_FN, 
+        KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, _______, _______, _______, KC_CIRC, KC_LBRC, KC_RBRC, KC_MINS, KC_EQL,  KC_GRV, 
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DLR,  KC_UNDS, KC_PLUS, _______, _______, _______, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______
         ),
     [3] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______, W_LTRD,  W_CTRD,  W_CTRD,  _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, 
-        _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______, W_L2TRD, W_MAX,   W_R2TRD, _______, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______, 
-        _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, W_UL,    W_U,     W_UR,    _______, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, _______, 
+        _______, _______, _______, _______, _______, _______, W_LTRD,  W_CTRD,  W_CTRD,  _______, KC_NLCK, KC_PSLS, KC_PAST, KC_PMNS, _______, 
+        _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______, W_L2TRD, W_MAX,   W_R2TRD, _______, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______, 
+        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, W_UL,    W_U,     W_UR,    _______, KC_P4,   KC_P5,   KC_P6,   KC_PCMM, _______, 
         _______, _______, _______, _______, _______, _______, W_L,     W_C,     W_R,     _______, KC_P1,   KC_P2,   KC_P3,   KC_PEQL, _______, 
         _______, _______, _______, _______, _______, _______, W_DL,    W_D,     W_DR,    _______, KC_P0,   KC_P0,   KC_PDOT, KC_PENT, _______
         ),
@@ -259,5 +260,5 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for CMD+J, twice for CMD+SHFT+J
     [TD_VS_TERM] = ACTION_TAP_DANCE_DOUBLE(G(KC_J), G(S(KC_J))),
     // Left and right thumbs
-    [TD_LTHUMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lthumb_finished, lthumb_reset, 300),
+    [TD_LTHUMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lthumb_finished, lthumb_reset, 200),
 };
