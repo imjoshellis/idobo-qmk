@@ -68,9 +68,7 @@ enum {
 
 // Tap Dance declarations
 enum {
-    TD_VS_TERM,
-    TD_LTHUMB,
-    TD_RTHUMB
+    TD_LTHUMB
 };
 
 uint8_t cur_dance(qk_tap_dance_state_t *state);
@@ -120,7 +118,7 @@ void    lthumb_reset(qk_tap_dance_state_t *state, void *user_data);
 #define Z_RESET G(KC_0)        // Zoom Reset
 
 // VS Code Controls
-#define VS_TERM TD(TD_VS_TERM) // Focus/Hide Terminal
+#define VS_TERM G(S(KC_J))     // Show/Hide Terminal
 #define VS_WIN1 G(KC_1)        // Focus First Panel
 #define VS_WIN2 G(KC_2)        // Focus Second Panel
 #define VS_EXP  G(S(KC_E))     // Focus Explorer
@@ -258,8 +256,6 @@ void lthumb_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for CMD+J, twice for CMD+SHFT+J
-    [TD_VS_TERM] = ACTION_TAP_DANCE_DOUBLE(G(KC_J), G(S(KC_J))),
     // Left and right thumbs
     [TD_LTHUMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lthumb_finished, lthumb_reset, 200),
 };
