@@ -89,6 +89,7 @@ void    lthumb_reset(qk_tap_dance_state_t *state, void *user_data);
 #define SG_BSPC  SGUI_T(KC_BSPC)   // SGUI || ENT 
 
 // Window Controls
+#define FLLSCRN C(G(KC_F))     // FULLSCREEN
 #define W_UL    C(A(KC_U))     // UP-LEFT
 #define W_U     C(A(KC_UP))    // UP
 #define W_UR    C(A(KC_I))     // UP-RIGHT
@@ -132,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    Z_OUT,   Z_RESET, Z_IN,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, OSL(3),  DIS_NCH, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    FLLSCRN, OSL(3),  DIS_NCH, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
         LC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_MUTE, KC_VOLD, KC_VOLU, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPRV, KC_MPLY, KC_MNXT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
         MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_BSPC,  RT_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
