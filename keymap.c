@@ -126,7 +126,7 @@ void    lthumb_reset(qk_tap_dance_state_t *state, void *user_data);
 #define VS_GIT  C(S(KC_G))     // Focus Source Control
 
 // Discord Controls
-#define DIS_NCH A(S(KC_DOWN))  // Focus/Hide Terminal
+#define DIS_NCH A(S(KC_DOWN))  // Discord next unread channel
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ortho_5x15(
