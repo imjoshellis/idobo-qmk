@@ -17,5 +17,5 @@
 #pragma once
 
 // place overrides here
-#define TAPPING_TERM 160
+#define TAPPING_TERM 180
 #define ONESHOT_TIMEOUT 1000

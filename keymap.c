@@ -53,35 +53,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
-// ***** TAP DANCE *****
-typedef struct {
-    bool    is_press_action;
-    uint8_t state;
-} tap;
-
-enum {
-    SINGLE_TAP = 1,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    DOUBLE_HOLD,
-};
-
-// Tap Dance declarations
-enum {
-    TD_LTHUMB
-};
-
-uint8_t cur_dance(qk_tap_dance_state_t *state);
-
-void    lthumb_finished(qk_tap_dance_state_t *state, void *user_data);
-void    lthumb_reset(qk_tap_dance_state_t *state, void *user_data);
-
 // ***** Definitions *****
 
 // Layers  
 #define F_TGL   LT(3, KC_F)      // F    || L3
-#define LT_SPC  TD(TD_LTHUMB)    // SPC  || TD LTHUMB 
-#define RT_SPC  LT(1, KC_SPC)    // SPC  || L1
+#define D_TGL   LT(1, KC_D)      // F    || L3
 
 // Tap / Hold
 #define LC_ESC  LCTL_T(KC_ESC)   // TAB  || CTRL 
@@ -135,9 +111,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    Z_OUT,   Z_RESET, Z_IN,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, 
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    FLLSCRN, OSL(3),  DIS_NCH, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, 
-        LC_ESC,  KC_A,    KC_S,    KC_D,    F_TGL,   KC_G,    KC_MUTE, KC_VOLD, KC_VOLU, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
+        LC_ESC,  KC_A,    KC_S,    D_TGL,   F_TGL,   KC_G,    KC_MUTE, KC_VOLD, KC_VOLU, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MPRV, KC_MPLY, KC_MNXT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT, 
-        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, LT_SPC,  SFT_TAB, _______, SG_BSPC,  RT_SPC,  CMD_TAB, OSL(3),  N_PD,    N_ND,    MO(12)
+        MO(3),   LCA_ESC, KC_LCTL, KC_LALT, KC_LGUI, MO(2),   SFT_TAB, _______, SG_BSPC, KC_SPC,  MO(1),   CMD_TAB, N_PD,    N_ND,    MO(12)
         ),
     [1] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -153,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, _______, _______, KC_HASH, KC_LCBR, KC_RCBR, ARW,     _______, ARW_FN, 
         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, _______, _______, _______, KC_CIRC, KC_LBRC, KC_RBRC, KC_MINS, KC_EQL,  KC_GRV, 
         _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DLR,  KC_UNDS, KC_PLUS, _______, _______, _______, 
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_ENT,  _______, _______, _______, _______, _______
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
         ),
     [3] = LAYOUT_ortho_5x15(
     //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -185,80 +161,3 @@ void matrix_scan_user(void) {
 }
 
 void led_set_user(uint8_t usb_led) {}
-
-uint8_t int_tap_cur_dance(qk_tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->pressed)
-            return SINGLE_HOLD;
-        else return SINGLE_TAP;
-    } else if (state->count == 2) {
-        if (state->pressed)
-            return DOUBLE_HOLD;
-        else return DOUBLE_TAP;
-    } else
-        return 8;
-}
-
-uint8_t int_hold_cur_dance(qk_tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (!state->pressed)
-            return SINGLE_TAP;
-        else return SINGLE_HOLD;
-    } else if (state->count == 2) {
-        if (!state->pressed)
-            return DOUBLE_TAP;
-        else return DOUBLE_HOLD;
-    } else
-        return 8;
-}
-
-static tap lthumb_tap_state = {.is_press_action = true, .state = 0};
-
-void lthumb_finished(qk_tap_dance_state_t *state, void *user_data) {
-    lthumb_tap_state.state = int_hold_cur_dance(state);
-    switch (lthumb_tap_state.state) {
-        case SINGLE_TAP:
-            dprint("lt single tap finished\n");
-            register_code(KC_SPC);
-            break;
-        case SINGLE_HOLD:
-            dprint("lt single hold finished\n"); 
-            layer_on(2);  
-            break;
-        case DOUBLE_TAP:
-            dprint("lt double tap finished\n");
-            register_code(KC_ESC);
-            break;
-        case DOUBLE_HOLD:
-            dprint("lt double hold finished\n");
-            layer_on(1);  
-            break;
-    }
-}
-
-void lthumb_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (lthumb_tap_state.state) {
-        case SINGLE_TAP:
-            dprint("lt single tap reset\n");
-            unregister_code(KC_SPC);
-            break;
-        case SINGLE_HOLD:
-            dprint("lt single hold reset\n");
-            layer_off(2);  
-            break;
-        case DOUBLE_TAP:
-            dprint("lt double tap reset\n");
-            unregister_code(KC_ESC);
-            break;
-        case DOUBLE_HOLD:
-            dprint("lt double hold reset\n");
-            layer_off(1);  
-    }
-    lthumb_tap_state.state = 0;
-}
-
-// Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    // Left and right thumbs
-    [TD_LTHUMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, lthumb_finished, lthumb_reset, 200),
-};
